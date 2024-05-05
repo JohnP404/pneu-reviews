@@ -28,7 +28,7 @@ export default function Header() {
                 <nav className="p-4 flex justify-between items-center">
                     <Link href={"/"}>
                         <h1 className="text-slate-300 font-semibold">
-                            Pneuzin Reviews
+                            Pneu Reviews
                         </h1>
                     </Link>
                     {screenWidth > 500 && (
