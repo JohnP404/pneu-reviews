@@ -1,0 +1,11 @@
+.bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -20;
+    min-height: 100svh;
+    width: 100svw;
+    opacity: 0.1;
+    background: url("/hero-bg.jpg") no-repeat center center;
+    background-size: cover;
+}
