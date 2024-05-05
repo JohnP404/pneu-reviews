@@ -14,20 +14,20 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <meta property="og:title" content="Pneuzin reviews" />
+            <meta property="og:title" content="Pneu reviews" />
             <meta
                 property="og:description"
-                content="Reviews de jogos e filmes"
+                content="Reviews de jogos e filmes feitas pelo renomado crítico de cinema e jornalista de games Jonathas Paes (Pneu)"
             />
             <meta
                 property="og:image"
-                content="https://cdn.discordapp.com/attachments/1006361676771233804/1220014106757693471/Screenshot_87.png?ex=660d65ad&is=65faf0ad&hm=926acdf683c6060f01f3e6834d68de096361907de29d355fe68a38fc4a1def75&"
+                content="https://cdn.discordapp.com/attachments/1006361676771233804/1236684653348388956/screenshot.png?ex=6638e7d5&is=66379655&hm=25567ea72d1e5de246dde137911e74d67b37e2f066a9b16300f34fff20506599&"
             />
             <meta
                 property="og:url"
-                content="https://pneuzin-reviews.vercel.app/"
+                content="https://pneu-reviews.vercel.app/"
             />
-            <title>Pneuzin Reviews</title>
+            <title>Pneu Reviews</title>
 
             <body className={`${poppins.className} scrollbox--master`}>
                 <AuthProvider>
