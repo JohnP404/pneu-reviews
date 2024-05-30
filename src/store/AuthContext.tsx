@@ -1,5 +1,5 @@
 import { auth } from "@/app/firebase";
-import { readUser } from "@/firebase/read";
+import { getUser } from "@/firebase/read";
 import { writeUser } from "@/firebase/write";
 
 import {
@@ -24,10 +24,6 @@ type Context = {
 	googleSignOut: () => Promise<void>;
 };
 
-const ADM_EMAIL1 = process.env.NEXT_PUBLIC_ADMIN_EMAIL1;
-const ADM_EMAIL2 = process.env.NEXT_PUBLIC_ADMIN_EMAIL2;
-const ADM_EMAIL3 = process.env.NEXT_PUBLIC_ADMIN_EMAIL3;
-
 export const AuthContext = createContext({});
 
 export default function AuthProvider({ children }: { children: ReactNode }) {
@@ -35,15 +31,14 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
 	const [isAdmin, setIsAdmin] = useState(false);
 
 	useEffect(() => {
-		const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-			if (
-				currentUser?.email === ADM_EMAIL1 ||
-				currentUser?.email === ADM_EMAIL2 ||
-				currentUser?.email === ADM_EMAIL3
-			) {
-				setIsAdmin(true);
+		const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+			if (currentUser) {
+				const firebaseUserData = await getUser(currentUser?.uid);
+				setIsAdmin(firebaseUserData.isAdmin);
+				setUser(currentUser);
+			} else {
+				setUser(null);
 			}
-			setUser(currentUser);
 		});
 
 		return () => unsubscribe();
@@ -55,7 +50,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
 			let { user } = await signInWithPopup(auth, provider);
 
 			setUser(user);
-			const userExists = await readUser(user.uid);
+			const userExists = await getUser(user.uid);
 
 			if (!userExists) {
 				writeUser(user);
